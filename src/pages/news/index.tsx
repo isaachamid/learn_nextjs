@@ -1,6 +1,7 @@
+import MainLayout from '@/layouts/MainLayout';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import React, {useEffect} from 'react';
+import React, {ReactElement, useEffect} from 'react';
 const News = () => {
   const router = useRouter();
   const [selectedId, setSelectedId] = React.useState<number>(0);
@@ -29,7 +30,7 @@ const News = () => {
     router.push(`/news/?id=${id}`, undefined, {shallow: true});
   };
   return (
-    <div>
+    <>
       <h2>News</h2>
       <ul>
         {news.map((item) => {
@@ -51,7 +52,11 @@ const News = () => {
           );
         })}
       </ul>
-    </div>
+    </>
   );
+};
+
+News.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
 };
 export default News;
